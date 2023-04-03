@@ -45,9 +45,11 @@ namespace Windows_Forams_LocManager
             this.nameSearch = new System.Windows.Forms.TabPage();
             this.nameDetails = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.NamePathTextBox = new System.Windows.Forms.TextBox();
+            this.NameDescriptTextBox = new System.Windows.Forms.TextBox();
+            this.NametranslationList = new System.Windows.Forms.ListView();
+            this.LanguageHeader = new System.Windows.Forms.ColumnHeader();
+            this.translationHeader = new System.Windows.Forms.ColumnHeader();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -83,20 +85,20 @@ namespace Windows_Forams_LocManager
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.saveToolStripMenuItem.Text = "Save ";
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.saveAsToolStripMenuItem.Text = "Save as";
             // 
             // editToolStripMenuItem
@@ -151,6 +153,7 @@ namespace Windows_Forams_LocManager
             this.treeView1.Name = "treeView1";
             this.treeView1.Size = new System.Drawing.Size(261, 437);
             this.treeView1.TabIndex = 0;
+            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
             // tabControl1
             // 
@@ -189,9 +192,9 @@ namespace Windows_Forams_LocManager
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Controls.Add(this.textBox1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.textBox2, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.listView1, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.NamePathTextBox, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.NameDescriptTextBox, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.NametranslationList, 0, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -202,34 +205,47 @@ namespace Windows_Forams_LocManager
             this.tableLayoutPanel1.Size = new System.Drawing.Size(505, 403);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // textBox1
+            // NamePathTextBox
             // 
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Location = new System.Drawing.Point(3, 3);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(499, 34);
-            this.textBox1.TabIndex = 0;
+            this.NamePathTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.NamePathTextBox.Location = new System.Drawing.Point(3, 3);
+            this.NamePathTextBox.Multiline = true;
+            this.NamePathTextBox.Name = "NamePathTextBox";
+            this.NamePathTextBox.ReadOnly = true;
+            this.NamePathTextBox.Size = new System.Drawing.Size(499, 34);
+            this.NamePathTextBox.TabIndex = 0;
             // 
-            // textBox2
+            // NameDescriptTextBox
             // 
-            this.textBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox2.Location = new System.Drawing.Point(3, 43);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(499, 114);
-            this.textBox2.TabIndex = 1;
+            this.NameDescriptTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.NameDescriptTextBox.Location = new System.Drawing.Point(3, 43);
+            this.NameDescriptTextBox.Multiline = true;
+            this.NameDescriptTextBox.Name = "NameDescriptTextBox";
+            this.NameDescriptTextBox.Size = new System.Drawing.Size(499, 114);
+            this.NameDescriptTextBox.TabIndex = 1;
             // 
-            // listView1
+            // NametranslationList
             // 
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(3, 163);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(499, 237);
-            this.listView1.TabIndex = 2;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.NametranslationList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.LanguageHeader,
+            this.translationHeader});
+            this.NametranslationList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.NametranslationList.FullRowSelect = true;
+            this.NametranslationList.HideSelection = false;
+            this.NametranslationList.Location = new System.Drawing.Point(3, 163);
+            this.NametranslationList.Name = "NametranslationList";
+            this.NametranslationList.Size = new System.Drawing.Size(499, 237);
+            this.NametranslationList.TabIndex = 2;
+            this.NametranslationList.UseCompatibleStateImageBehavior = false;
+            this.NametranslationList.View = System.Windows.Forms.View.Details;
+            // 
+            // LanguageHeader
+            // 
+            this.LanguageHeader.Text = "Language";
+            // 
+            // translationHeader
+            // 
+            this.translationHeader.Text = "Translation";
             // 
             // Form1
             // 
@@ -276,9 +292,11 @@ namespace Windows_Forams_LocManager
         private System.Windows.Forms.TabPage nameSearch;
         private System.Windows.Forms.TabPage nameDetails;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.TextBox NamePathTextBox;
+        private System.Windows.Forms.TextBox NameDescriptTextBox;
+        private System.Windows.Forms.ListView NametranslationList;
+        private System.Windows.Forms.ColumnHeader LanguageHeader;
+        private System.Windows.Forms.ColumnHeader translationHeader;
     }
 }
 

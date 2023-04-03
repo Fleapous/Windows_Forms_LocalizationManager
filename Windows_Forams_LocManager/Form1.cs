@@ -20,6 +20,7 @@ namespace Windows_Forams_LocManager
     public partial class Form1 : Form
     {
         List<DialogEntry> entries = new List<DialogEntry>();
+
         public Form1()
         {
             InitializeComponent();
@@ -45,6 +46,30 @@ namespace Windows_Forams_LocManager
                 TreeMaker(entries);
             }
         }
+        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            NametranslationList.Items.Clear();
+            var selectedNode = e.Node;
+            var tag = selectedNode.Tag;
+            DialogEntry file = entries.FirstOrDefault(o => o.LocKey == (string)tag);
+
+            if(file == null)
+            {
+                
+            }
+            else
+            {
+                //setting textBox fields
+                NamePathTextBox.Text = file.HierarchyPath;
+                NameDescriptTextBox.Text = file.Translations.Debug;
+
+                //setting list items
+                string translationText = file.Translations.Debug;
+                string translationLanguage = "Debug";
+                ListViewItem newItem = new ListViewItem(new[] { translationLanguage, translationText });
+                NametranslationList.Items.Add(newItem);
+            }
+        }
 
         private List<DialogEntry> DeSerializer(string filepath)
         {
@@ -59,7 +84,7 @@ namespace Windows_Forams_LocManager
                     {
                         string filestring = reader.ReadToEnd();
                         DialogEntry diagEntry = JsonSerializer.Deserialize<DialogEntry>(filestring);
-                        MessageBox.Show($"File Path: {diagEntry.HierarchyPath}, ");
+                        //MessageBox.Show($"File Path: {diagEntry.HierarchyPath}, ");
                         res.Add(diagEntry);
                     }
                 }
@@ -94,27 +119,19 @@ namespace Windows_Forams_LocManager
                         currentNode.Nodes.Add(childNode);
                     }
 
-                    // Set the tag of the node to the LocKey property of the corresponding DialogEntry
-                    childNode.Tag = path.LocKey;
-
                     // Update the current node to be the newly created or existing child node
                     currentNode = childNode;
                 }
 
-                // If the last directory in the path is not already a node, add it
-                if (currentNode.Text != directories.Last())
-                {
-                    var childNode = new TreeNode(directories.Last());
-                    childNode.Tag = path.LocKey;
-                    currentNode.Nodes.Add(childNode);
-                }
+                // Add the entry as a node to the final directory
+                var entryNode = new TreeNode(path.EntryName);
+                entryNode.Tag = path.LocKey;
+                currentNode.Nodes.Add(entryNode);
             }
 
             // Add the root node to the TreeView
             treeView1.Nodes.Add(rootNode);
         }
-
-
 
     }
 }
