@@ -13,7 +13,7 @@ namespace Windows_Forams_LocManager
         /// </summary>
         [STAThread]
         static void Main()
-        {
+       {
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

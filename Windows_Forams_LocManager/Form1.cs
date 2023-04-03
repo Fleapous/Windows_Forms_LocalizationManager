@@ -15,10 +15,15 @@ namespace Windows_Forams_LocManager
     public partial class Form1 : Form
     {
         List<DialogEntry> entries = new List<DialogEntry>();
+        //bool rightCLick = false;
+        //System.Drawing.Point point;
+        TreeNode subNode, parentNode;
+
 
         public Form1()
         {
             InitializeComponent();
+            //treeView1.ShowNodeToolTips = true;
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -34,7 +39,7 @@ namespace Windows_Forams_LocManager
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 string filePath = dialog.FileName;
-                MessageBox.Show($"File Path: {filePath}");
+                //MessageBox.Show($"File Path: {filePath}");
 
                 //treeView1.Nodes.Add(filePath);
                 entries = DeSerializer(filePath);
@@ -43,6 +48,16 @@ namespace Windows_Forams_LocManager
         }
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            //if (rightClick)
+            //{
+            //    // Show the context menu
+            //    //MessageBox.Show("flag is true");
+            //    contextMenuStrip1.Show(treeView1, treeView1.PointToClient(Control.MousePosition));
+            //    //get the node
+            //    currentNode = e.Node;
+            //    rightClick = false;
+            //}
+
             NametranslationList.Items.Clear();
             var selectedNode = e.Node;
             var tag = selectedNode.Tag;
@@ -84,8 +99,15 @@ namespace Windows_Forams_LocManager
                 NameSearchList.Items.Add(newItem);
             }
         }
+        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
 
+        }
 
+        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+
+        }
         private List<DialogEntry> DeSerializer(string filepath)
         {
 
@@ -149,6 +171,52 @@ namespace Windows_Forams_LocManager
             treeView1.Nodes.Add(rootNode);
         }
 
+        private void newGroupToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(parentNode != null)
+            {
+                //adding a sub node to parent node
+                MessageBox.Show(parentNode.Text + " it worked");
+                parentNode.Nodes.Add("hello");
+            }
+            parentNode = null;
+        }
 
+        private void newSubToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(subNode != null)
+            {
+                //adding a subnode 
+                MessageBox.Show(subNode.Text + " it worked");
+                subNode.Nodes.Add("hello_sub");
+            }
+            subNode = null;
+        }
+
+        private void deleteGroupToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(subNode != null)
+            {
+                //deleting the current node i e subnode 
+                MessageBox.Show("deleting " + subNode.Text);
+                subNode.Remove();
+            }
+            subNode = null;
+        }
+
+        private void treeView1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right && treeView1.GetNodeAt(e.Location) != null)
+            {
+                //show menu strip
+                contextMenuStrip1.Show(e.Location);
+
+                // pre alocating node and sub node
+                subNode = new TreeNode();
+                parentNode = new TreeNode();
+                subNode = treeView1.GetNodeAt(e.Location);
+                parentNode = treeView1.GetNodeAt(e.Location).Parent;
+            }
+        }
     }
 }
