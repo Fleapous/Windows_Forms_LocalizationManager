@@ -24,6 +24,7 @@ namespace Windows_Forams_LocManager
         {
             InitializeComponent();
             //treeView1.ShowNodeToolTips = true;
+            treeView1.LabelEdit = true;
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -175,9 +176,11 @@ namespace Windows_Forams_LocManager
         {
             if(parentNode != null)
             {
+                var newNode = new TreeNode();
                 //adding a sub node to parent node
                 MessageBox.Show(parentNode.Text + " it worked");
-                parentNode.Nodes.Add("hello");
+                newNode = parentNode.Nodes.Add("<hey :)>");
+                newNode.BeginEdit();
             }
             parentNode = null;
         }
@@ -186,9 +189,11 @@ namespace Windows_Forams_LocManager
         {
             if(subNode != null)
             {
+                var newNode = new TreeNode();
                 //adding a subnode 
                 MessageBox.Show(subNode.Text + " it worked");
-                subNode.Nodes.Add("hello_sub");
+                newNode = subNode.Nodes.Add("<hey_sub :)>");
+                newNode.BeginEdit();
             }
             subNode = null;
         }
