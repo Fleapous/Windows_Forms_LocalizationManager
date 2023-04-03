@@ -29,6 +29,7 @@ namespace Windows_Forams_LocManager
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,6 +44,12 @@ namespace Windows_Forams_LocManager
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.nameSearch = new System.Windows.Forms.TabPage();
+            this.NameSearchList = new System.Windows.Forms.ListView();
+            this.LocKeyHeader = new System.Windows.Forms.ColumnHeader();
+            this.PathHeader = new System.Windows.Forms.ColumnHeader();
+            this.DebugHeader = new System.Windows.Forms.ColumnHeader();
+            this.NameSearchButton = new System.Windows.Forms.Button();
+            this.NameSearchBar = new System.Windows.Forms.TextBox();
             this.nameDetails = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.NamePathTextBox = new System.Windows.Forms.TextBox();
@@ -50,14 +57,25 @@ namespace Windows_Forams_LocManager
             this.NametranslationList = new System.Windows.Forms.ListView();
             this.LanguageHeader = new System.Windows.Forms.ColumnHeader();
             this.translationHeader = new System.Windows.Forms.ColumnHeader();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.englishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.polishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.spanishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.portugueseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.chineseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.tabControl1.SuspendLayout();
+            this.nameSearch.SuspendLayout();
             this.nameDetails.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -149,8 +167,11 @@ namespace Windows_Forams_LocManager
             // treeView1
             // 
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeView1.ImageIndex = 0;
+            this.treeView1.ImageList = this.imageList1;
             this.treeView1.Location = new System.Drawing.Point(0, 0);
             this.treeView1.Name = "treeView1";
+            this.treeView1.SelectedImageIndex = 0;
             this.treeView1.Size = new System.Drawing.Size(261, 437);
             this.treeView1.TabIndex = 0;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
@@ -168,6 +189,9 @@ namespace Windows_Forams_LocManager
             // 
             // nameSearch
             // 
+            this.nameSearch.Controls.Add(this.NameSearchList);
+            this.nameSearch.Controls.Add(this.NameSearchButton);
+            this.nameSearch.Controls.Add(this.NameSearchBar);
             this.nameSearch.Location = new System.Drawing.Point(4, 24);
             this.nameSearch.Name = "nameSearch";
             this.nameSearch.Padding = new System.Windows.Forms.Padding(3);
@@ -175,6 +199,56 @@ namespace Windows_Forams_LocManager
             this.nameSearch.TabIndex = 0;
             this.nameSearch.Text = "Search";
             this.nameSearch.UseVisualStyleBackColor = true;
+            // 
+            // NameSearchList
+            // 
+            this.NameSearchList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.NameSearchList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.LocKeyHeader,
+            this.PathHeader,
+            this.DebugHeader});
+            this.NameSearchList.FullRowSelect = true;
+            this.NameSearchList.HideSelection = false;
+            this.NameSearchList.Location = new System.Drawing.Point(6, 33);
+            this.NameSearchList.Name = "NameSearchList";
+            this.NameSearchList.Size = new System.Drawing.Size(497, 368);
+            this.NameSearchList.TabIndex = 2;
+            this.NameSearchList.UseCompatibleStateImageBehavior = false;
+            this.NameSearchList.View = System.Windows.Forms.View.Details;
+            // 
+            // LocKeyHeader
+            // 
+            this.LocKeyHeader.Text = "LocKey";
+            // 
+            // PathHeader
+            // 
+            this.PathHeader.Text = "Path";
+            // 
+            // DebugHeader
+            // 
+            this.DebugHeader.Text = "Debug";
+            // 
+            // NameSearchButton
+            // 
+            this.NameSearchButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.NameSearchButton.Location = new System.Drawing.Point(394, 6);
+            this.NameSearchButton.Name = "NameSearchButton";
+            this.NameSearchButton.Size = new System.Drawing.Size(109, 23);
+            this.NameSearchButton.TabIndex = 1;
+            this.NameSearchButton.Text = "Search";
+            this.NameSearchButton.UseVisualStyleBackColor = true;
+            // 
+            // NameSearchBar
+            // 
+            this.NameSearchBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.NameSearchBar.Location = new System.Drawing.Point(6, 6);
+            this.NameSearchBar.Name = "NameSearchBar";
+            this.NameSearchBar.Size = new System.Drawing.Size(383, 23);
+            this.NameSearchBar.TabIndex = 0;
             // 
             // nameDetails
             // 
@@ -247,11 +321,83 @@ namespace Windows_Forams_LocManager
             // 
             this.translationHeader.Text = "Translation";
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripDropDownButton1,
+            this.toolStripProgressBar1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 439);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(784, 22);
+            this.statusStrip1.TabIndex = 2;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripDropDownButton1
+            // 
+            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.englishToolStripMenuItem,
+            this.polishToolStripMenuItem,
+            this.spanishToolStripMenuItem,
+            this.portugueseToolStripMenuItem,
+            this.chineseToolStripMenuItem});
+            this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
+            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(66, 20);
+            this.toolStripDropDownButton1.Text = "Translate";
+            // 
+            // englishToolStripMenuItem
+            // 
+            this.englishToolStripMenuItem.Name = "englishToolStripMenuItem";
+            this.englishToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.englishToolStripMenuItem.Text = "English";
+            // 
+            // polishToolStripMenuItem
+            // 
+            this.polishToolStripMenuItem.Name = "polishToolStripMenuItem";
+            this.polishToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.polishToolStripMenuItem.Text = "Polish";
+            // 
+            // spanishToolStripMenuItem
+            // 
+            this.spanishToolStripMenuItem.Name = "spanishToolStripMenuItem";
+            this.spanishToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.spanishToolStripMenuItem.Text = "Spanish";
+            // 
+            // portugueseToolStripMenuItem
+            // 
+            this.portugueseToolStripMenuItem.Name = "portugueseToolStripMenuItem";
+            this.portugueseToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.portugueseToolStripMenuItem.Text = "Portuguese";
+            // 
+            // chineseToolStripMenuItem
+            // 
+            this.chineseToolStripMenuItem.Name = "chineseToolStripMenuItem";
+            this.chineseToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.chineseToolStripMenuItem.Text = "Chinese";
+            // 
+            // toolStripProgressBar1
+            // 
+            this.toolStripProgressBar1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
+            this.toolStripProgressBar1.RightToLeftLayout = true;
+            this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 16);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "folder.ico");
+            this.imageList1.Images.SetKeyName(1, "file.ico");
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 461);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -267,9 +413,13 @@ namespace Windows_Forams_LocManager
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
+            this.nameSearch.ResumeLayout(false);
+            this.nameSearch.PerformLayout();
             this.nameDetails.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -297,6 +447,21 @@ namespace Windows_Forams_LocManager
         private System.Windows.Forms.ListView NametranslationList;
         private System.Windows.Forms.ColumnHeader LanguageHeader;
         private System.Windows.Forms.ColumnHeader translationHeader;
+        private System.Windows.Forms.ListView NameSearchList;
+        private System.Windows.Forms.Button NameSearchButton;
+        private System.Windows.Forms.TextBox NameSearchBar;
+        private System.Windows.Forms.ColumnHeader LocKeyHeader;
+        private System.Windows.Forms.ColumnHeader PathHeader;
+        private System.Windows.Forms.ColumnHeader DebugHeader;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
+        private System.Windows.Forms.ToolStripMenuItem englishToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem polishToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem spanishToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem portugueseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem chineseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
+        private System.Windows.Forms.ImageList imageList1;
     }
 }
 

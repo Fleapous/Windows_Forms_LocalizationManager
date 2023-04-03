@@ -126,6 +126,7 @@ namespace Windows_Forams_LocManager
                 // Add the entry as a node to the final directory
                 var entryNode = new TreeNode(path.EntryName);
                 entryNode.Tag = path.LocKey;
+                entryNode.ImageIndex = 1;
                 currentNode.Nodes.Add(entryNode);
             }
 
