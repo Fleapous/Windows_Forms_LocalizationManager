@@ -42,6 +42,7 @@ namespace Windows_Forams_LocManager
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.treeView1 = new System.Windows.Forms.TreeView();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.nameSearch = new System.Windows.Forms.TabPage();
             this.NameSearchList = new System.Windows.Forms.ListView();
@@ -65,7 +66,7 @@ namespace Windows_Forams_LocManager
             this.portugueseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.chineseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -176,6 +177,14 @@ namespace Windows_Forams_LocManager
             this.treeView1.TabIndex = 0;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
+            // imageList1
+            // 
+            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "folder.ico");
+            this.imageList1.Images.SetKeyName(1, "file.ico");
+            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.nameSearch);
@@ -240,6 +249,7 @@ namespace Windows_Forams_LocManager
             this.NameSearchButton.TabIndex = 1;
             this.NameSearchButton.Text = "Search";
             this.NameSearchButton.UseVisualStyleBackColor = true;
+            this.NameSearchButton.Click += new System.EventHandler(this.NameSearchButton_Click);
             // 
             // NameSearchBar
             // 
@@ -384,14 +394,6 @@ namespace Windows_Forams_LocManager
             this.toolStripProgressBar1.RightToLeftLayout = true;
             this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 16);
             // 
-            // imageList1
-            // 
-            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "folder.ico");
-            this.imageList1.Images.SetKeyName(1, "file.ico");
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -462,6 +464,7 @@ namespace Windows_Forams_LocManager
         private System.Windows.Forms.ToolStripMenuItem chineseToolStripMenuItem;
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
         private System.Windows.Forms.ImageList imageList1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 

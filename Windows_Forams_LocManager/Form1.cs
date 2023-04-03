@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.IO;
 using System.IO.Compression;
-using Newtonsoft.Json.Linq;
+using System.Linq;
 using System.Text.Json;
+using System.Windows.Forms;
 
 
 namespace Windows_Forams_LocManager
@@ -53,9 +48,9 @@ namespace Windows_Forams_LocManager
             var tag = selectedNode.Tag;
             DialogEntry file = entries.FirstOrDefault(o => o.LocKey == (string)tag);
 
-            if(file == null)
+            if (file == null)
             {
-                
+
             }
             else
             {
@@ -70,6 +65,26 @@ namespace Windows_Forams_LocManager
                 NametranslationList.Items.Add(newItem);
             }
         }
+        private void NameSearchButton_Click(object sender, EventArgs e)
+        {
+            NameSearchList.Items.Clear();
+            // get the search string
+            string searchBar = NameSearchBar.Text;
+
+            //look for the given name in the entries list and add all that matches the searchBar string to the list
+            List<DialogEntry> resoult = entries.FindAll(s => s.EntryName.Contains(searchBar));
+
+            foreach(DialogEntry res in resoult)
+            {
+                string LocKey_ = res.LocKey;
+                string Path_ = res.HierarchyPath + '-' + res.EntryName;
+                string Debug_ = res.Translations.Debug;
+
+                ListViewItem newItem = new ListViewItem(new[] { LocKey_, Path_, Debug_ });
+                NameSearchList.Items.Add(newItem);
+            }
+        }
+
 
         private List<DialogEntry> DeSerializer(string filepath)
         {
@@ -133,6 +148,7 @@ namespace Windows_Forams_LocManager
             // Add the root node to the TreeView
             treeView1.Nodes.Add(rootNode);
         }
+
 
     }
 }
