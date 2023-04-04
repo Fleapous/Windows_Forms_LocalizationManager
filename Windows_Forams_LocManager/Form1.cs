@@ -27,7 +27,7 @@ namespace Windows_Forams_LocManager
 
         //for editing files 
         private string globalTag;
-
+        private TreeNode toBeDeletedNode;
 
         public Form1()
         {
@@ -61,6 +61,7 @@ namespace Windows_Forams_LocManager
         //displays the details of sllected tag ie node
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            //clearing boxes
             globalTag = null;
             NametranslationList.Items.Clear();
             NameDescriptTextBox.Text = string.Empty;
@@ -69,6 +70,8 @@ namespace Windows_Forams_LocManager
 
             var selectedNode = e.Node;
             var tag = selectedNode.Tag;
+
+            toBeDeletedNode = e.Node;
 
             //setting the global tag as the tag thats been selected
             globalTag = (string)selectedNode.Tag;
@@ -176,7 +179,7 @@ namespace Windows_Forams_LocManager
 
                 // Add the entry as a node to the final directory
                 var entryNode = new TreeNode(path.EntryName);
-                entryNode.Tag = path.LocKey;
+                entryNode.Tag = (string)path.LocKey;
                 entryNode.ImageIndex = 1;
                 currentNode.Nodes.Add(entryNode);
             }
@@ -317,6 +320,29 @@ namespace Windows_Forams_LocManager
                 NametranslationList.Items.Add(newItem);
             }
             tag = null;
+        }
+
+        //deleting a file
+        private void deleteEntryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+            string tag = globalTag;
+            DialogEntry file = allEntries.FirstOrDefault(o => o.LocKey == tag);
+
+            if (file != null)
+            {
+                // Remove the file from the list
+                allEntries.Remove(file);
+
+                if (toBeDeletedNode != null)
+                {
+                    // Remove the node from the tree view
+                    toBeDeletedNode.Remove();
+                }
+            }
+
+            toBeDeletedNode = null;
+            treeView1.Refresh();
         }
 
         //selects the node thats clicked on and saves it to a global var named subNode 
