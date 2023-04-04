@@ -14,10 +14,13 @@ namespace Windows_Forams_LocManager
 
     public partial class Form1 : Form
     {
+        //global vars :(
         List<DialogEntry> entries = new List<DialogEntry>();
-        //bool rightCLick = false;
-        //System.Drawing.Point point;
-        TreeNode subNode, parentNode;
+        private TreeNode subNode, parentNode;
+        string path;
+        private DialogEntry newEntry = new DialogEntry();
+
+
 
 
         public Form1()
@@ -172,55 +175,108 @@ namespace Windows_Forams_LocManager
             treeView1.Nodes.Add(rootNode);
         }
 
+        // creates new group
         private void newGroupToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if(parentNode != null)
             {
                 var newNode = new TreeNode();
                 //adding a sub node to parent node
-                MessageBox.Show(parentNode.Text + " it worked");
+                //MessageBox.Show(parentNode.Text + " it worked");
                 newNode = parentNode.Nodes.Add("<hey :)>");
                 newNode.BeginEdit();
             }
             parentNode = null;
         }
 
+        //creates a sub group
         private void newSubToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if(subNode != null)
             {
                 var newNode = new TreeNode();
                 //adding a subnode 
-                MessageBox.Show(subNode.Text + " it worked");
+                //MessageBox.Show(subNode.Text + " it worked");
                 newNode = subNode.Nodes.Add("<hey_sub :)>");
                 newNode.BeginEdit();
             }
             subNode = null;
         }
 
+        //deletes the sellected group
         private void deleteGroupToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if(subNode != null)
             {
                 //deleting the current node i e subnode 
-                MessageBox.Show("deleting " + subNode.Text);
+                //MessageBox.Show("deleting " + subNode.Text);
                 subNode.Remove();
             }
             subNode = null;
         }
 
+        //creates a file
+        private void newEntryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (subNode != null)
+            {
+                //MessageBox.Show(path);
+                //set the pre text 
+                NamePathTextBox.Text = path;
+                // setthe carrot
+                NamePathTextBox.SelectionStart = path.Length;
+
+                // make it edittabble
+                NamePathTextBox.ReadOnly = false;
+
+                //set focuses
+                nameDetails.Focus();
+                NamePathTextBox.Focus();
+            }
+        }
+
+        //when enter key is pressed get sets the name of the file as well as the path 
+        private void NamePathTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                //sets the path of the new entry
+                DialogEntry tmp = new DialogEntry();
+                tmp.HierarchyPath = NamePathTextBox.Text;
+                newEntry = tmp;
+                //shifts focus to description box
+                NameDescriptTextBox.Focus();
+            }
+        }
+
         private void treeView1_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right && treeView1.GetNodeAt(e.Location) != null)
-            {
-                //show menu strip
-                contextMenuStrip1.Show(e.Location);
+            if (treeView1.GetNodeAt(e.Location) != null)
+            {                
 
-                // pre alocating node and sub node
-                subNode = new TreeNode();
-                parentNode = new TreeNode();
+                // pre alocating node and sub node and a tmp node
                 subNode = treeView1.GetNodeAt(e.Location);
                 parentNode = treeView1.GetNodeAt(e.Location).Parent;
+                TreeNode tmp = treeView1.GetNodeAt(e.Location);
+
+                //get the path of the subNode
+                List<string> pathList = new List<string>();
+                while(tmp != null)
+                {
+                    //MessageBox.Show(tmp.Text);
+                    pathList.Add(tmp.Text);
+                    tmp = tmp.Parent;
+                    
+                }
+                pathList.Reverse();
+                path = string.Join("-", pathList) + "-";
+
+
+                if(e.Button == MouseButtons.Right)
+                {
+                    //show menu strip
+                    contextMenuStrip1.Show(e.Location);
+                } 
             }
         }
     }
