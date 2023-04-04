@@ -33,6 +33,7 @@ namespace Windows_Forams_LocManager
         {
             InitializeComponent();
             //treeView1.ShowNodeToolTips = true;
+
             treeView1.LabelEdit = true;
         }
 
@@ -40,6 +41,9 @@ namespace Windows_Forams_LocManager
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             entries.Clear();
+            allEntries.Clear();
+            treeView1.Nodes.Clear();
+
 
             using OpenFileDialog dialog = new OpenFileDialog();
             dialog.InitialDirectory = Directory.GetCurrentDirectory();
@@ -55,9 +59,17 @@ namespace Windows_Forams_LocManager
                 //treeView1.Nodes.Add(filePath);
                 entries = DeSerializer(filePath);
                 allEntries = entries;
+
                 TreeMaker(entries);
             }
         }
+
+        //saving as a zip
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Serializer(allEntries);
+        }
+
         //displays the details of sllected tag ie node
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
@@ -95,7 +107,7 @@ namespace Windows_Forams_LocManager
                 NametranslationList.Items.Add(newItem);
             }
         }
-
+         
         //search bar 
         private void NameSearchButton_Click(object sender, EventArgs e)
         {
@@ -125,6 +137,8 @@ namespace Windows_Forams_LocManager
         {
 
         }
+
+        
         private List<DialogEntry> DeSerializer(string filepath)
         {
 
@@ -145,6 +159,46 @@ namespace Windows_Forams_LocManager
             }
             return res;
         }
+
+        //serializes the list and saves it as a zip
+        private void Serializer(List<DialogEntry> entries)
+        {
+            // Create a new file dialog and set the default file name and extension
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.FileName = "dialog_entries.zip";
+            saveFileDialog.DefaultExt = ".zip";
+            saveFileDialog.Filter = "Zip files (*.zip)|*.zip";
+
+            // Show the file dialog and get the result
+            DialogResult result = saveFileDialog.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                // Create a new memory stream to write the zip archive to
+                MemoryStream memoryStream = new MemoryStream();
+
+                // Create a new zip archive
+                using (ZipArchive archive = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
+                {
+                    // Serialize each DialogEntry object and add it to the zip archive
+                    foreach (DialogEntry entry in entries)
+                    {
+                        // Create a new zip archive entry with the LocKey as the file name
+                        ZipArchiveEntry zipEntry = archive.CreateEntry($"{entry.LocKey}.json", CompressionLevel.Optimal);
+
+                        // Serialize the DialogEntry object to a JSON string and write it to the zip archive entry
+                        using (StreamWriter writer = new StreamWriter(zipEntry.Open()))
+                        {
+                            string jsonString = JsonSerializer.Serialize(entry);
+                            writer.Write(jsonString);
+                        }
+                    }
+                }
+
+                // Save the zip archive to the file path selected by the user
+                File.WriteAllBytes(saveFileDialog.FileName, memoryStream.ToArray());
+            }
+        }
+
 
         private void TreeMaker(List<DialogEntry> diags)
         {
@@ -219,14 +273,54 @@ namespace Windows_Forams_LocManager
         //deletes the sellected group
         private void deleteGroupToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(subNode != null)
+            if (subNode != null)
             {
-                //deleting the current node i e subnode 
-                //MessageBox.Show("deleting " + subNode.Text);
+                //check if any entries has the name of the deleted group in tehir path and delete those ones from
+                // the list
+                List<DialogEntry> tmp = allEntries.ToList(); // create a copy of the list
+                foreach (var item in tmp)
+                {
+                    string[] splited = item.HierarchyPath.Split("-");
+                    if (splited.Contains(subNode.Text))
+                    {
+                        allEntries.Remove(item);
+                    }
+                }
+
+
+
+                // Delete subNode itself
                 subNode.Remove();
+                subNode = null;
             }
-            subNode = null;
         }
+
+        //private void DeleteNodeAndDescendants(TreeNode node)
+        //{
+        //    // Recursively delete all child nodes
+        //    foreach (TreeNode childNode in node.Nodes)
+        //    {
+        //        if(childNode.Nodes.Count > 0)
+        //        {
+        //            DeleteNodeAndDescendants(childNode);
+        //        }
+                
+        //        // Check if the child node has a tag and perform an action
+        //        if (childNode.Tag != null)
+        //        {
+        //            // delete the file from the list
+        //            DialogEntry file = allEntries.FirstOrDefault(o => o.LocKey == (string)childNode.Tag);
+        //            if(file != null)
+        //            {
+        //                allEntries.Remove(file);
+        //            }
+        //        }
+
+        //        // Remove the child node
+        //        childNode.Remove();
+        //    }
+        //}
+
 
         //creates a file
         private void newEntryToolStripMenuItem_Click(object sender, EventArgs e)
@@ -344,6 +438,8 @@ namespace Windows_Forams_LocManager
             toBeDeletedNode = null;
             treeView1.Refresh();
         }
+
+
 
         //selects the node thats clicked on and saves it to a global var named subNode 
         private void treeView1_MouseClick(object sender, MouseEventArgs e)
