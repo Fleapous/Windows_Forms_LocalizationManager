@@ -97,7 +97,7 @@ namespace Windows_Forams_LocManager
             else
             {
                 //setting textBox fields
-                NamePathTextBox.Text = file.HierarchyPath;
+                NamePathTextBox.Text = file.HierarchyPath + "-" + file.EntryName;
                 NameDescriptTextBox.Text = file.Translations.Debug;
 
                 //setting list items
@@ -217,6 +217,7 @@ namespace Windows_Forams_LocManager
                 // Loop through each directory in the path
                 foreach (var directory in directories)
                 {
+
                     // Check if the current node already has a child with the same name as the directory
                     var childNode = currentNode.Nodes.Cast<TreeNode>().FirstOrDefault(n => n.Text == directory);
 
@@ -241,6 +242,7 @@ namespace Windows_Forams_LocManager
             // Add the root node to the TreeView
             treeView1.Nodes.Add(rootNode);
         }
+
 
         // creates new group
         private void newGroupToolStripMenuItem_Click(object sender, EventArgs e)
@@ -327,12 +329,13 @@ namespace Windows_Forams_LocManager
         {
             if (subNode != null)
             {
-                //MessageBox.Show(path);
-
+                string[] tmpArr = path.Split("-");
+                string res = string.Join("-", tmpArr.Skip(1));
                 //set the pre text 
-                NamePathTextBox.Text = path;
+                NamePathTextBox.Text = res;
+
                 // setthe carrot
-                NamePathTextBox.SelectionStart = path.Length;
+                NamePathTextBox.SelectionStart = res.Length;
 
                 // make it edittabble
                 NamePathTextBox.ReadOnly = false;
@@ -346,16 +349,18 @@ namespace Windows_Forams_LocManager
         //when enter key is pressed get sets the name of the file as well as the path 
         private void NamePathTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Enter)
+            if(e.KeyCode == Keys.Enter && this.Validate() && this.ValidateChildren())
             {
                 // get the textbox text and find the name of the file from it ie last dir
                 string[] splited = NamePathTextBox.Text.Split("-");
-                string name = splited[splited.Length - 1]; 
+                string name = splited[splited.Length - 1];
+                string realPath = string.Join("-", splited);
+                MessageBox.Show("validated: realPath: " + realPath);
 
                 //sets the path of the new entry
                 DialogEntry tmp = new DialogEntry();
                 Translations tmpT = new Translations();
-                tmp.HierarchyPath = NamePathTextBox.Text;
+                tmp.HierarchyPath = realPath;
                 tmp.LocKey = Guid.NewGuid().ToString("N");
                 tmp.EntryName = name;
                 tmpT.Debug = "tmp";
@@ -439,7 +444,28 @@ namespace Windows_Forams_LocManager
             treeView1.Refresh();
         }
 
-
+        //checking wheter new entrie has same path as older files
+        private void NameSearchBar_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string path_ = NamePathTextBox.Text;
+            foreach(var entrie in allEntries)
+            {
+                
+                string tmp = entrie.HierarchyPath + "-" + entrie.EntryName;
+                MessageBox.Show("validation", tmp + " = " + path_);
+                if (tmp == path_)
+                {
+                    NameerrorProvider1.SetError(NamePathTextBox, "name cannot be the same name as other file");
+                    e.Cancel = true;
+                    return;
+                }
+                else
+                {
+                    NameerrorProvider1.SetError(NamePathTextBox, string.Empty);
+                    e.Cancel = false;
+                }
+            }
+        }
 
         //selects the node thats clicked on and saves it to a global var named subNode 
         private void treeView1_MouseClick(object sender, MouseEventArgs e)
