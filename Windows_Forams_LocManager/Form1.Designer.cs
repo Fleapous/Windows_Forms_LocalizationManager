@@ -94,8 +94,7 @@ namespace Windows_Forams_LocManager
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(11, 4, 0, 4);
-            this.menuStrip1.Size = new System.Drawing.Size(1456, 44);
+            this.menuStrip1.Size = new System.Drawing.Size(784, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -105,20 +104,20 @@ namespace Windows_Forams_LocManager
             this.openToolStripMenuItem,
             this.saveAsToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(71, 36);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(226, 44);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(226, 44);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.saveAsToolStripMenuItem.Text = "Save as";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
@@ -128,35 +127,34 @@ namespace Windows_Forams_LocManager
             this.newEntryToolStripMenuItem,
             this.deleteEntryToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(74, 36);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
             this.editToolStripMenuItem.Text = "Edit";
             // 
             // newEntryToolStripMenuItem
             // 
             this.newEntryToolStripMenuItem.Name = "newEntryToolStripMenuItem";
-            this.newEntryToolStripMenuItem.Size = new System.Drawing.Size(278, 44);
+            this.newEntryToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.newEntryToolStripMenuItem.Text = "New entry";
             this.newEntryToolStripMenuItem.Click += new System.EventHandler(this.newEntryToolStripMenuItem_Click);
             // 
             // deleteEntryToolStripMenuItem
             // 
             this.deleteEntryToolStripMenuItem.Name = "deleteEntryToolStripMenuItem";
-            this.deleteEntryToolStripMenuItem.Size = new System.Drawing.Size(278, 44);
+            this.deleteEntryToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.deleteEntryToolStripMenuItem.Text = "Delete Entry";
             this.deleteEntryToolStripMenuItem.Click += new System.EventHandler(this.deleteEntryToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(84, 36);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // splitContainer1
             // 
             this.splitContainer1.Cursor = System.Windows.Forms.Cursors.VSplit;
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 44);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 24);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -166,9 +164,8 @@ namespace Windows_Forams_LocManager
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tabControl1);
-            this.splitContainer1.Size = new System.Drawing.Size(1456, 939);
-            this.splitContainer1.SplitterDistance = 482;
-            this.splitContainer1.SplitterWidth = 7;
+            this.splitContainer1.Size = new System.Drawing.Size(784, 437);
+            this.splitContainer1.SplitterDistance = 259;
             this.splitContainer1.TabIndex = 1;
             // 
             // treeView1
@@ -178,12 +175,12 @@ namespace Windows_Forams_LocManager
             this.treeView1.ImageIndex = 0;
             this.treeView1.ImageList = this.imageList1;
             this.treeView1.Location = new System.Drawing.Point(0, 0);
-            this.treeView1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.treeView1.Name = "treeView1";
             this.treeView1.SelectedImageIndex = 0;
-            this.treeView1.Size = new System.Drawing.Size(482, 939);
+            this.treeView1.Size = new System.Drawing.Size(259, 437);
             this.treeView1.TabIndex = 0;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
+            this.treeView1.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
             this.treeView1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.treeView1_MouseClick);
             // 
             // contextMenuStrip1
@@ -194,26 +191,26 @@ namespace Windows_Forams_LocManager
             this.newSubToolStripMenuItem,
             this.deleteGroupToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(258, 118);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(158, 70);
             // 
             // newGroupToolStripMenuItem
             // 
             this.newGroupToolStripMenuItem.Name = "newGroupToolStripMenuItem";
-            this.newGroupToolStripMenuItem.Size = new System.Drawing.Size(257, 38);
+            this.newGroupToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.newGroupToolStripMenuItem.Text = "New Group";
             this.newGroupToolStripMenuItem.Click += new System.EventHandler(this.newGroupToolStripMenuItem_Click);
             // 
             // newSubToolStripMenuItem
             // 
             this.newSubToolStripMenuItem.Name = "newSubToolStripMenuItem";
-            this.newSubToolStripMenuItem.Size = new System.Drawing.Size(257, 38);
+            this.newSubToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.newSubToolStripMenuItem.Text = "New Sub Group";
             this.newSubToolStripMenuItem.Click += new System.EventHandler(this.newSubToolStripMenuItem_Click);
             // 
             // deleteGroupToolStripMenuItem
             // 
             this.deleteGroupToolStripMenuItem.Name = "deleteGroupToolStripMenuItem";
-            this.deleteGroupToolStripMenuItem.Size = new System.Drawing.Size(257, 38);
+            this.deleteGroupToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.deleteGroupToolStripMenuItem.Text = "Delete Group";
             this.deleteGroupToolStripMenuItem.Click += new System.EventHandler(this.deleteGroupToolStripMenuItem_Click);
             // 
@@ -231,10 +228,9 @@ namespace Windows_Forams_LocManager
             this.tabControl1.Controls.Add(this.nameDetails);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(967, 939);
+            this.tabControl1.Size = new System.Drawing.Size(521, 437);
             this.tabControl1.TabIndex = 0;
             // 
             // nameSearch
@@ -242,11 +238,10 @@ namespace Windows_Forams_LocManager
             this.nameSearch.Controls.Add(this.NameSearchList);
             this.nameSearch.Controls.Add(this.NameSearchButton);
             this.nameSearch.Controls.Add(this.NameSearchBar);
-            this.nameSearch.Location = new System.Drawing.Point(8, 46);
-            this.nameSearch.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.nameSearch.Location = new System.Drawing.Point(4, 24);
             this.nameSearch.Name = "nameSearch";
-            this.nameSearch.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.nameSearch.Size = new System.Drawing.Size(951, 885);
+            this.nameSearch.Padding = new System.Windows.Forms.Padding(3);
+            this.nameSearch.Size = new System.Drawing.Size(513, 409);
             this.nameSearch.TabIndex = 0;
             this.nameSearch.Text = "Search";
             this.nameSearch.UseVisualStyleBackColor = true;
@@ -262,13 +257,13 @@ namespace Windows_Forams_LocManager
             this.DebugHeader});
             this.NameSearchList.FullRowSelect = true;
             this.NameSearchList.HideSelection = false;
-            this.NameSearchList.Location = new System.Drawing.Point(11, 70);
-            this.NameSearchList.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.NameSearchList.Location = new System.Drawing.Point(6, 33);
             this.NameSearchList.Name = "NameSearchList";
-            this.NameSearchList.Size = new System.Drawing.Size(922, 790);
+            this.NameSearchList.Size = new System.Drawing.Size(498, 369);
             this.NameSearchList.TabIndex = 2;
             this.NameSearchList.UseCompatibleStateImageBehavior = false;
             this.NameSearchList.View = System.Windows.Forms.View.Details;
+            this.NameSearchList.DoubleClick += new System.EventHandler(this.NameSearchList_DoubleClick);
             // 
             // LocKeyHeader
             // 
@@ -286,10 +281,9 @@ namespace Windows_Forams_LocManager
             // 
             this.NameSearchButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.NameSearchButton.Location = new System.Drawing.Point(732, 13);
-            this.NameSearchButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.NameSearchButton.Location = new System.Drawing.Point(394, 6);
             this.NameSearchButton.Name = "NameSearchButton";
-            this.NameSearchButton.Size = new System.Drawing.Size(203, 49);
+            this.NameSearchButton.Size = new System.Drawing.Size(109, 23);
             this.NameSearchButton.TabIndex = 1;
             this.NameSearchButton.Text = "Search";
             this.NameSearchButton.UseVisualStyleBackColor = true;
@@ -299,21 +293,20 @@ namespace Windows_Forams_LocManager
             // 
             this.NameSearchBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.NameSearchBar.Location = new System.Drawing.Point(11, 13);
-            this.NameSearchBar.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.NameSearchBar.Location = new System.Drawing.Point(6, 6);
             this.NameSearchBar.Name = "NameSearchBar";
-            this.NameSearchBar.Size = new System.Drawing.Size(711, 39);
+            this.NameSearchBar.Size = new System.Drawing.Size(385, 23);
             this.NameSearchBar.TabIndex = 0;
+            this.NameSearchBar.KeyDown += new System.Windows.Forms.KeyEventHandler(this.NameSearchBar_KeyDown);
             this.NameSearchBar.Validating += new System.ComponentModel.CancelEventHandler(this.NameSearchBar_Validating);
             // 
             // nameDetails
             // 
             this.nameDetails.Controls.Add(this.tableLayoutPanel1);
-            this.nameDetails.Location = new System.Drawing.Point(8, 46);
-            this.nameDetails.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.nameDetails.Location = new System.Drawing.Point(4, 24);
             this.nameDetails.Name = "nameDetails";
-            this.nameDetails.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.nameDetails.Size = new System.Drawing.Size(950, 878);
+            this.nameDetails.Padding = new System.Windows.Forms.Padding(3);
+            this.nameDetails.Size = new System.Drawing.Size(513, 409);
             this.nameDetails.TabIndex = 1;
             this.nameDetails.Text = "Details";
             this.nameDetails.UseVisualStyleBackColor = true;
@@ -322,41 +315,38 @@ namespace Windows_Forams_LocManager
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 37F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Controls.Add(this.NamePathTextBox, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.NameDescriptTextBox, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.NametranslationList, 0, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 6);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(938, 866);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(507, 403);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // NamePathTextBox
             // 
             this.NamePathTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.NamePathTextBox.Location = new System.Drawing.Point(6, 6);
-            this.NamePathTextBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.NamePathTextBox.Location = new System.Drawing.Point(3, 3);
             this.NamePathTextBox.Multiline = true;
             this.NamePathTextBox.Name = "NamePathTextBox";
             this.NamePathTextBox.ReadOnly = true;
-            this.NamePathTextBox.Size = new System.Drawing.Size(926, 74);
+            this.NamePathTextBox.Size = new System.Drawing.Size(501, 34);
             this.NamePathTextBox.TabIndex = 0;
             this.NamePathTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.NamePathTextBox_KeyDown);
             // 
             // NameDescriptTextBox
             // 
             this.NameDescriptTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.NameDescriptTextBox.Location = new System.Drawing.Point(6, 92);
-            this.NameDescriptTextBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.NameDescriptTextBox.Location = new System.Drawing.Point(3, 43);
             this.NameDescriptTextBox.Multiline = true;
             this.NameDescriptTextBox.Name = "NameDescriptTextBox";
-            this.NameDescriptTextBox.Size = new System.Drawing.Size(926, 247);
+            this.NameDescriptTextBox.Size = new System.Drawing.Size(501, 114);
             this.NameDescriptTextBox.TabIndex = 1;
             this.NameDescriptTextBox.TextChanged += new System.EventHandler(this.NameDescriptTextBox_TextChanged);
             this.NameDescriptTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.NameDescriptTextBox_KeyDown);
@@ -369,10 +359,9 @@ namespace Windows_Forams_LocManager
             this.NametranslationList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.NametranslationList.FullRowSelect = true;
             this.NametranslationList.HideSelection = false;
-            this.NametranslationList.Location = new System.Drawing.Point(6, 351);
-            this.NametranslationList.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.NametranslationList.Location = new System.Drawing.Point(3, 163);
             this.NametranslationList.Name = "NametranslationList";
-            this.NametranslationList.Size = new System.Drawing.Size(926, 509);
+            this.NametranslationList.Size = new System.Drawing.Size(501, 237);
             this.NametranslationList.TabIndex = 2;
             this.NametranslationList.UseCompatibleStateImageBehavior = false;
             this.NametranslationList.View = System.Windows.Forms.View.Details;
@@ -391,10 +380,9 @@ namespace Windows_Forams_LocManager
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripDropDownButton1,
             this.toolStripProgressBar1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 943);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 439);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Padding = new System.Windows.Forms.Padding(2, 0, 26, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1456, 40);
+            this.statusStrip1.Size = new System.Drawing.Size(784, 22);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -410,37 +398,37 @@ namespace Windows_Forams_LocManager
             this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            this.toolStripDropDownButton1.Size = new System.Drawing.Size(130, 36);
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(66, 20);
             this.toolStripDropDownButton1.Text = "Translate";
             // 
             // englishToolStripMenuItem
             // 
             this.englishToolStripMenuItem.Name = "englishToolStripMenuItem";
-            this.englishToolStripMenuItem.Size = new System.Drawing.Size(267, 44);
+            this.englishToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.englishToolStripMenuItem.Text = "English";
             // 
             // polishToolStripMenuItem
             // 
             this.polishToolStripMenuItem.Name = "polishToolStripMenuItem";
-            this.polishToolStripMenuItem.Size = new System.Drawing.Size(267, 44);
+            this.polishToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.polishToolStripMenuItem.Text = "Polish";
             // 
             // spanishToolStripMenuItem
             // 
             this.spanishToolStripMenuItem.Name = "spanishToolStripMenuItem";
-            this.spanishToolStripMenuItem.Size = new System.Drawing.Size(267, 44);
+            this.spanishToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.spanishToolStripMenuItem.Text = "Spanish";
             // 
             // portugueseToolStripMenuItem
             // 
             this.portugueseToolStripMenuItem.Name = "portugueseToolStripMenuItem";
-            this.portugueseToolStripMenuItem.Size = new System.Drawing.Size(267, 44);
+            this.portugueseToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.portugueseToolStripMenuItem.Text = "Portuguese";
             // 
             // chineseToolStripMenuItem
             // 
             this.chineseToolStripMenuItem.Name = "chineseToolStripMenuItem";
-            this.chineseToolStripMenuItem.Size = new System.Drawing.Size(267, 44);
+            this.chineseToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.chineseToolStripMenuItem.Text = "Chinese";
             // 
             // toolStripProgressBar1
@@ -448,7 +436,7 @@ namespace Windows_Forams_LocManager
             this.toolStripProgressBar1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripProgressBar1.Name = "toolStripProgressBar1";
             this.toolStripProgressBar1.RightToLeftLayout = true;
-            this.toolStripProgressBar1.Size = new System.Drawing.Size(186, 28);
+            this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 16);
             // 
             // backgroundWorker1
             // 
@@ -461,15 +449,15 @@ namespace Windows_Forams_LocManager
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1456, 983);
+            this.ClientSize = new System.Drawing.Size(784, 461);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LocManager";

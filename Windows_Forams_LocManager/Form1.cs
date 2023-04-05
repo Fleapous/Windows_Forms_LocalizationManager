@@ -33,6 +33,13 @@ namespace Windows_Forams_LocManager
         {
             InitializeComponent();
             //treeView1.ShowNodeToolTips = true;
+            tabControl1.SelectedTab = nameDetails;
+
+            //adding the root
+            TreeNode root = new TreeNode("<ROOT>");
+            root.ImageIndex = 0;
+            root.SelectedImageIndex = 0;
+            treeView1.Nodes.Add(root);
 
             treeView1.LabelEdit = true;
         }
@@ -111,21 +118,27 @@ namespace Windows_Forams_LocManager
         //search bar 
         private void NameSearchButton_Click(object sender, EventArgs e)
         {
+            //MessageBox.Show("debug");
             NameSearchList.Items.Clear();
             // get the search string
             string searchBar = NameSearchBar.Text;
 
-            //look for the given name in the entries list and add all that matches the searchBar string to the list
-            List<DialogEntry> resoult = allEntries.FindAll(s => s.EntryName.Contains(searchBar));
-
-            foreach(DialogEntry res in resoult)
+            if (searchBar != string.Empty)
             {
-                string LocKey_ = res.LocKey;
-                string Path_ = res.HierarchyPath + '-' + res.EntryName;
-                string Debug_ = res.Translations.Debug;
+                //look for the given name in the entries list and add all that matches the searchBar string to the list
+                List<DialogEntry> resoult = allEntries.FindAll(s => s.EntryName.Contains(searchBar));
 
-                ListViewItem newItem = new ListViewItem(new[] { LocKey_, Path_, Debug_ });
-                NameSearchList.Items.Add(newItem);
+                foreach (DialogEntry res in resoult)
+                {
+                    //MessageBox.Show("working");
+                    string LocKey_ = res.LocKey;
+                    string Path_ = res.HierarchyPath + '-' + res.EntryName;
+                    string Debug_ = res.Translations.Debug;
+
+                    ListViewItem newItem = new ListViewItem(new[] { LocKey_, Path_, Debug_ });
+                    newItem.Tag = LocKey_;
+                    NameSearchList.Items.Add(newItem);
+                }
             }
         }
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
@@ -202,6 +215,7 @@ namespace Windows_Forams_LocManager
 
         private void TreeMaker(List<DialogEntry> diags)
         {
+            treeView1.Nodes.Clear();
             // Create the root node
             var rootNode = new TreeNode("Root");
 
@@ -236,6 +250,7 @@ namespace Windows_Forams_LocManager
                 var entryNode = new TreeNode(path.EntryName);
                 entryNode.Tag = (string)path.LocKey;
                 entryNode.ImageIndex = 1;
+                entryNode.SelectedImageIndex = 1;
                 currentNode.Nodes.Add(entryNode);
             }
 
@@ -297,33 +312,6 @@ namespace Windows_Forams_LocManager
             }
         }
 
-        //private void DeleteNodeAndDescendants(TreeNode node)
-        //{
-        //    // Recursively delete all child nodes
-        //    foreach (TreeNode childNode in node.Nodes)
-        //    {
-        //        if(childNode.Nodes.Count > 0)
-        //        {
-        //            DeleteNodeAndDescendants(childNode);
-        //        }
-                
-        //        // Check if the child node has a tag and perform an action
-        //        if (childNode.Tag != null)
-        //        {
-        //            // delete the file from the list
-        //            DialogEntry file = allEntries.FirstOrDefault(o => o.LocKey == (string)childNode.Tag);
-        //            if(file != null)
-        //            {
-        //                allEntries.Remove(file);
-        //            }
-        //        }
-
-        //        // Remove the child node
-        //        childNode.Remove();
-        //    }
-        //}
-
-
         //creates a file
         private void newEntryToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -349,7 +337,7 @@ namespace Windows_Forams_LocManager
         //when enter key is pressed get sets the name of the file as well as the path 
         private void NamePathTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Enter && this.Validate() && this.ValidateChildren())
+            if(e.KeyCode == Keys.Enter && this.ValidateChildren())
             {
                 // get the textbox text and find the name of the file from it ie last dir
                 string[] splited = NamePathTextBox.Text.Split("-");
@@ -452,7 +440,7 @@ namespace Windows_Forams_LocManager
             {
                 
                 string tmp = entrie.HierarchyPath + "-" + entrie.EntryName;
-                MessageBox.Show("validation", tmp + " = " + path_);
+                //MessageBox.Show("validation", tmp + " = " + path_);
                 if (tmp == path_)
                 {
                     NameerrorProvider1.SetError(NamePathTextBox, "name cannot be the same name as other file");
@@ -463,6 +451,78 @@ namespace Windows_Forams_LocManager
                 {
                     NameerrorProvider1.SetError(NamePathTextBox, string.Empty);
                     e.Cancel = false;
+                }
+            }
+        }
+
+        //data binding to details tab
+        private void treeView1_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            TreeNode selectedNode = e.Node;
+            if (selectedNode.Tag != null)
+            {
+                DialogEntry file = allEntries.FirstOrDefault(o => o.LocKey == (string)selectedNode.Tag);
+                NamePathTextBox.Text = file.HierarchyPath + "-" + file.EntryName;
+                NameDescriptTextBox.Text = file.Translations.Debug;
+
+                NametranslationList.Items.Clear();
+                string translationText = file.Translations.Debug;
+                string translationLanguage = "Debug";
+                ListViewItem newItem = new ListViewItem(new[] { translationLanguage, translationText });
+                NametranslationList.Items.Add(newItem);
+
+                tabControl1.SelectedTab = nameDetails;
+            }
+        }
+
+        //data binding search bar
+        private void NameSearchList_DoubleClick(object sender, EventArgs e)
+        {
+            ListViewItem selectedItem = NameSearchList.SelectedItems[0];
+
+            if (selectedItem != null)
+            {
+                DialogEntry file = allEntries.FirstOrDefault(o => o.LocKey == (string)selectedItem.Tag);
+                NamePathTextBox.Text = file.HierarchyPath + "-" + file.EntryName;
+                NameDescriptTextBox.Text = file.Translations.Debug;
+
+                NametranslationList.Items.Clear();
+                string translationText = file.Translations.Debug;
+                string translationLanguage = "Debug";
+                ListViewItem newItem = new ListViewItem(new[] { translationLanguage, translationText });
+                NametranslationList.Items.Add(newItem);
+
+                tabControl1.SelectedTab = nameDetails;
+                NameSearchList.Items.Clear();
+            }
+
+        }
+
+        private void NameSearchBar_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                //MessageBox.Show("debug_enter");
+                NameSearchList.Items.Clear();
+                // get the search string
+                string searchBar = NameSearchBar.Text;
+
+                if (searchBar != string.Empty)
+                {
+                    //look for the given name in the entries list and add all that matches the searchBar string to the list
+                    List<DialogEntry> resoult = allEntries.FindAll(s => s.EntryName.Contains(searchBar));
+
+                    foreach (DialogEntry res in resoult)
+                    {
+                        ////MessageBox.Show("working_enter");
+                        string LocKey_ = res.LocKey;
+                        string Path_ = res.HierarchyPath + '-' + res.EntryName;
+                        string Debug_ = res.Translations.Debug;
+
+                        ListViewItem newItem = new ListViewItem(new[] { LocKey_, Path_, Debug_ });
+                        newItem.Tag = LocKey_;
+                        NameSearchList.Items.Add(newItem);
+                    }
                 }
             }
         }
