@@ -29,6 +29,8 @@ namespace Windows_Forams_LocManager
         private string globalTag;
         private TreeNode toBeDeletedNode;
 
+        bool rootFlag = true;
+
         public Form1()
         {
             InitializeComponent();
@@ -216,8 +218,9 @@ namespace Windows_Forams_LocManager
         private void TreeMaker(List<DialogEntry> diags)
         {
             treeView1.Nodes.Clear();
+            rootFlag = false;
             // Create the root node
-            var rootNode = new TreeNode("Root");
+            var rootNode = new TreeNode("<ROOT>");
 
             // Loop through each path
             foreach (var path in diags)
@@ -262,7 +265,17 @@ namespace Windows_Forams_LocManager
         // creates new group
         private void newGroupToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(parentNode != null)
+            if(rootFlag == true)
+            {
+                treeView1.Nodes.Clear();
+                TreeNode root = new TreeNode("<ROOT>");
+                root.ImageIndex = 0;
+                root.SelectedImageIndex = 0;
+                treeView1.Nodes.Add(root);
+                root.BeginEdit();
+                rootFlag = false;
+            }
+            else if(parentNode != null)
             {
                 var newNode = new TreeNode();
                 //adding a sub node to parent node
@@ -328,6 +341,7 @@ namespace Windows_Forams_LocManager
                 // make it edittabble
                 NamePathTextBox.ReadOnly = false;
 
+
                 //set focuses
                 nameDetails.Focus();
                 NamePathTextBox.Focus();
@@ -342,12 +356,13 @@ namespace Windows_Forams_LocManager
                 // get the textbox text and find the name of the file from it ie last dir
                 string[] splited = NamePathTextBox.Text.Split("-");
                 string name = splited[splited.Length - 1];
-                string realPath = string.Join("-", splited);
-                MessageBox.Show("validated: realPath: " + realPath);
+                string realPath = string.Join("-", splited.Take(splited.Length - 1));
+                //MessageBox.Show("validated: realPath: " + realPath);
 
                 //sets the path of the new entry
                 DialogEntry tmp = new DialogEntry();
                 Translations tmpT = new Translations();
+
                 tmp.HierarchyPath = realPath;
                 tmp.LocKey = Guid.NewGuid().ToString("N");
                 tmp.EntryName = name;
@@ -363,6 +378,7 @@ namespace Windows_Forams_LocManager
                 newNode.Tag = tmp.LocKey;
                 newNode.Text = tmp.EntryName;
                 newNode.ImageIndex = 1;
+                newNode.SelectedImageIndex = 1;                     
                 subNode.Nodes.Add(newNode);
 
                 // add new entry to all entries list
@@ -374,6 +390,24 @@ namespace Windows_Forams_LocManager
             }
         }
 
+        private void NamePathTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (subNode != null)
+            {
+                string[] tmpArr = path.Split("-");
+                string res = string.Join("-", tmpArr.Skip(1));
+                // Check if the length of the text is less than the length of the pre-existing text
+                if (NamePathTextBox.TextLength < res.Length)
+                {
+                    // Reset the text to the pre-existing text
+                    NamePathTextBox.Text = res;
+
+                    // Move the caret to the end of the text
+                    NamePathTextBox.SelectionStart = NamePathTextBox.TextLength;
+                }
+            }
+        }
+
         private void NameDescriptTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if(e.KeyCode == Keys.Enter)
@@ -381,6 +415,8 @@ namespace Windows_Forams_LocManager
 
             }
         }
+
+
 
 
         //updates the sellected files details with each key stroke
@@ -475,6 +511,8 @@ namespace Windows_Forams_LocManager
             }
         }
 
+
+
         //data binding search bar
         private void NameSearchList_DoubleClick(object sender, EventArgs e)
         {
@@ -526,6 +564,32 @@ namespace Windows_Forams_LocManager
                 }
             }
         }
+
+        private void treeView1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                string tag = globalTag;
+                DialogEntry file = allEntries.FirstOrDefault(o => o.LocKey == tag);
+
+                if (file != null)
+                {
+                    // Remove the file from the list
+                    allEntries.Remove(file);
+
+                    if (toBeDeletedNode != null)
+                    {
+                        // Remove the node from the tree view
+                        toBeDeletedNode.Remove();
+                    }
+                }
+
+                toBeDeletedNode = null;
+                treeView1.Refresh();
+                e.IsInputKey = true;
+            }
+        }
+
 
         //selects the node thats clicked on and saves it to a global var named subNode 
         private void treeView1_MouseClick(object sender, MouseEventArgs e)

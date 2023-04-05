@@ -182,6 +182,7 @@ namespace Windows_Forams_LocManager
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             this.treeView1.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
             this.treeView1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.treeView1_MouseClick);
+            this.treeView1.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.treeView1_PreviewKeyDown);
             // 
             // contextMenuStrip1
             // 
@@ -338,6 +339,7 @@ namespace Windows_Forams_LocManager
             this.NamePathTextBox.ReadOnly = true;
             this.NamePathTextBox.Size = new System.Drawing.Size(501, 34);
             this.NamePathTextBox.TabIndex = 0;
+            this.NamePathTextBox.TextChanged += new System.EventHandler(this.NamePathTextBox_TextChanged);
             this.NamePathTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.NamePathTextBox_KeyDown);
             // 
             // NameDescriptTextBox
